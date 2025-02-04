@@ -1,7 +1,7 @@
-import Bingo.Game;
+import Bingo.GameHander;
 
 public class Main {
     public static void main(String[] args) {
-        Game game = new Game("BingoCards.txt");
+        GameHander game = new GameHander("BingoCards.txt");
     }
 }
