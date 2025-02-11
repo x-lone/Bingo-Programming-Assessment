@@ -2,11 +2,17 @@ package Bingo;
 
 public class CardHandler {
     private String name;
-    private int[][] values;
+    private int[] values;
 
-    public CardHandler(String name, int[][] values) {
+    public CardHandler(String name, String values) {
         this.name = name;
-        this.values = values;
+
+        String[] temp = values.split(",");
+        this.values = new int[temp.length];
+
+        for (int i = 0; i < temp.length; i++) {
+            this.values[i] = Integer.parseInt(temp[i].replace(" ", ""));
+        }
     }
 
     public boolean StampLocation() {
@@ -19,20 +25,15 @@ public class CardHandler {
         return false;
     }
 
-    public void DrawCard() {
-        System.out.println("------" + name + "------");
-        System.out.println("    B I N G O    ");
-        System.out.println("-+--+--+--+--+--+");
-        for (int y = 0; y < 5; y++) {
-            System.out.print("BINGO".charAt(y) + "|");
-            for (int x = 0; x < 5; x++) {
-                System.out.printf("%2s|", values[y][x]);
-            }
-            System.out.println("\n-+--+--+--+--+--+");
+    public int[] GetRow(int row) {
+        int[] temp = new int[5];
+        for (int i = 0; i < temp.length; i++) {
+            temp[i] = values[i*(row+1)];
         }
+        return temp;
     }
 
-    public void DrawLine() {
-
+    public String GetName() {
+        return name;
     }
 }
