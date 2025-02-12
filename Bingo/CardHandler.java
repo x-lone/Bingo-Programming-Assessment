@@ -28,7 +28,7 @@ public class CardHandler {
     public int[] GetRow(int row) {
         int[] temp = new int[5];
         for (int i = 0; i < temp.length; i++) {
-            temp[i] = values[i*(row+1)];
+            temp[i] = values[(row*5)+i];
         }
         return temp;
     }

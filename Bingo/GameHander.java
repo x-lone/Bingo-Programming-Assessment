@@ -3,11 +3,18 @@ package Bingo;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.Scanner;
+import java.util.Random;
 
 public class GameHander {
     private CardHandler[] allCards;
     private int totalCardCount;
     private CardHandler[] userCards;
+
+    public GameHander(String path) {
+        allCards = new CardHandler[20];
+        CreateCardsFromFullTxt(path);
+    }
 
     private boolean CreateCardsFromFullTxt(String path) {
         try {
@@ -37,9 +44,28 @@ public class GameHander {
         return false;
     }
 
-    public void DrawUserCards() {
+    private void SelectUserCards(int cardCount) {
+        Random rand = new Random();
+
+        CardHandler[] tempCards = allCards.clone();
+
+        userCards = new CardHandler[cardCount];
+        for (int i = 0; i < cardCount; i++) {
+            int selectedIndex = rand.nextInt(totalCardCount - i);
+            userCards[i] = tempCards[selectedIndex];
+            CardHandler[] temp = new CardHandler[tempCards.length - 1];
+            for (int x = 0, y = 0; x < tempCards.length; x++) {
+                if (x != selectedIndex) {
+                    temp[y++] = tempCards[x];
+                }
+            }
+            tempCards = temp;
+        }
+    }
+
+    private void DrawUserCards() {
         for (int card = 0; card < userCards.length; card++) {
-            System.out.print("------" + allCards[card].GetName() + "------   ");
+            System.out.print("------" + userCards[card].GetName() + "------   ");
         }
         System.out.println();
         for (int card = 0; card < userCards.length; card++) {
@@ -51,11 +77,11 @@ public class GameHander {
         }
         System.out.println();
 
-        for (int y = 0; y < userCards.length; y++) {
+        for (int y = 0; y < 5; y++) {
             for (int card = 0; card < userCards.length; card++) {
-                int[] row = allCards[card].GetRow(y);
+                int[] row = userCards[card].GetRow(y);
                 System.out.print("BINGO".charAt(y) + "|");
-                for (int x = 0; x < userCards.length; x++) {
+                for (int x = 0; x < 5; x++) {
                     int value = row[x];
                     System.out.printf("%2d|", value);
                 }
@@ -69,13 +95,6 @@ public class GameHander {
         }
     }
 
-    private void ImportCards(int cardCount) {
-        // cards = new CardHandler[cardCount];
-        // for (int i = 0; i < cardCount; i++) {
-        //     cards[i] = new CardHandler();
-        // }
-    }
-
     private void Random() {
 
     }
@@ -84,15 +103,15 @@ public class GameHander {
 
     }
 
-    public GameHander(String path) {
-        allCards = new CardHandler[20];
-        userCards = new CardHandler[0];
-
-        CreateCardsFromFullTxt(path);
-        DrawUserCards();
-    }
-
     public void run() {
+        Scanner scanner = new Scanner(System.in);
 
+        System.out.println("How many cards would you like? (1-3)");
+        int cardCount = scanner.nextInt();
+        scanner.close();
+
+        SelectUserCards(cardCount);
+        
+        DrawUserCards();
     }
 }
