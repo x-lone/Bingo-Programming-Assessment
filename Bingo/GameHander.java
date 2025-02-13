@@ -6,17 +6,24 @@ import java.io.IOException;
 import java.util.Scanner;
 import java.util.Random;
 
+// TODO
+// 1. Flesh out Card Stamping
+// 2. Get User Input
+// 3. Constrain User Input
+// 4. Check Win Condition
+// 5. Flesh out Game Modes
+
 public class GameHander {
     private CardHandler[] allCards;
     private int totalCardCount;
     private CardHandler[] userCards;
+    private String[] calledSpaces;
 
-    public GameHander(String path) {
-        allCards = new CardHandler[20];
-        CreateCardsFromFullTxt(path);
+    public GameHander() {
+        resetGame();
     }
 
-    private boolean CreateCardsFromFullTxt(String path) {
+    public boolean createCardsFromTxt(String path) {
         try {
             BufferedReader reader = new BufferedReader(new FileReader(path));
             String line;
@@ -38,32 +45,34 @@ public class GameHander {
             reader.close();
         } catch (IOException ex) {
             ex.printStackTrace();
-            return true;
+            return false;
         }
 
-        return false;
+        return true;
     }
 
-    private void SelectUserCards(int cardCount) {
+    private void selectUserCards(int cardCount) { // maybe add another function to this
         Random rand = new Random();
 
-        CardHandler[] tempCards = allCards.clone();
-
         userCards = new CardHandler[cardCount];
+        CardHandler[] availableCards = allCards.clone();
+        
         for (int i = 0; i < cardCount; i++) {
             int selectedIndex = rand.nextInt(totalCardCount - i);
-            userCards[i] = tempCards[selectedIndex];
-            CardHandler[] temp = new CardHandler[tempCards.length - 1];
-            for (int x = 0, y = 0; x < tempCards.length; x++) {
+            userCards[i] = availableCards[selectedIndex];
+
+            CardHandler[] temp = new CardHandler[availableCards.length - 1];
+            for (int x = 0, y = 0; x < availableCards.length; x++) {
                 if (x != selectedIndex) {
-                    temp[y++] = tempCards[x];
+                    temp[y++] = availableCards[x];
                 }
             }
-            tempCards = temp;
+
+            availableCards = temp;
         }
     }
 
-    private void DrawUserCards() {
+    private void drawUserCards() { // this is really long see what you can do
         for (int card = 0; card < userCards.length; card++) {
             System.out.print("------" + userCards[card].GetName() + "------   ");
         }
@@ -95,12 +104,39 @@ public class GameHander {
         }
     }
 
-    private void Random() {
+    private String caller(int depth) { // might be able to change the depth checker
+        Random rand = new Random();
+
+        int letterIndex = rand.nextInt(5);
+        int numberIndex = rand.nextInt(15) + 1;
+
+        String newSpace = "BINGO".charAt(letterIndex) + Integer.toString(numberIndex + letterIndex * 15);
+        
+        int i = 0;
+        while (calledSpaces[i] != null) {
+            if (calledSpaces[i].equals(newSpace)) {
+                newSpace = Caller(1);
+            }
+            i++;
+        }
+        if (depth == 0) {
+            calledSpaces[i] = newSpace;
+        }
+
+        return newSpace;
+    }
+
+    private void random() {
 
     }
 
-    private void Manual() {
+    private void manual() {
 
+    }
+
+    private void resetGame() {
+        allCards = new CardHandler[20];
+        calledSpaces = new String[75];
     }
 
     public void run() {
@@ -110,8 +146,12 @@ public class GameHander {
         int cardCount = scanner.nextInt();
         scanner.close();
 
-        SelectUserCards(cardCount);
+        selectUserCards(cardCount);
         
-        DrawUserCards();
+        drawUserCards();
+
+        for (int i = 0; i < 75; i++) {
+            System.out.println(caller(0));
+        }
     }
 }
