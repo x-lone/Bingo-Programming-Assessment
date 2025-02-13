@@ -15,17 +15,17 @@ public class CardHandler {
         }
     }
 
-    public boolean StampLocation() {
+    public boolean stampLocation() {
 
         return false;
     }
 
-    public boolean ValidateCard() {
+    public boolean validateCard() {
 
         return false;
     }
 
-    public int[] GetRow(int row) {
+    public int[] getRow(int row) {
         int[] temp = new int[5];
         for (int i = 0; i < temp.length; i++) {
             temp[i] = values[(row*5)+i];
@@ -33,7 +33,7 @@ public class CardHandler {
         return temp;
     }
 
-    public String GetName() {
+    public String getName() {
         return name;
     }
 }
