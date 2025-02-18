@@ -7,10 +7,10 @@ import java.util.Scanner;
 import java.util.Random;
 
 // TODO
-// 1. Flesh out Card Stamping
-// 2. Get User Input
-// 3. Constrain User Input
-// 4. Check Win Condition
+// X. Flesh out Card Stamping 
+// X. Check Win Condition 
+// X. Get User Input 
+// 4. Constrain User Input
 // 5. Flesh out Game Modes
 
 public class GameHander {
@@ -74,11 +74,11 @@ public class GameHander {
 
     private void drawUserCards() { // this is really long see what you can do
         for (int card = 0; card < userCards.length; card++) {
-            System.out.print("------" + userCards[card].GetName() + "------   ");
+            System.out.print("------" + userCards[card].getName() + "------   ");
         }
         System.out.println();
         for (int card = 0; card < userCards.length; card++) {
-            System.out.print("    B I N G O       ");
+            System.out.print("  B  I  N  G  O     ");
         }
         System.out.println();
         for (int card = 0; card < userCards.length; card++) {
@@ -88,11 +88,11 @@ public class GameHander {
 
         for (int y = 0; y < 5; y++) {
             for (int card = 0; card < userCards.length; card++) {
-                int[] row = userCards[card].GetRow(y);
+                String[] row = userCards[card].getRowSpaces(y);
                 System.out.print("BINGO".charAt(y) + "|");
                 for (int x = 0; x < 5; x++) {
-                    int value = row[x];
-                    System.out.printf("%2d|", value);
+                    String value = row[x];
+                    System.out.printf("%2s|", value);
                 }
                 System.out.print("   ");
             }
@@ -107,15 +107,14 @@ public class GameHander {
     private String caller(int depth) { // might be able to change the depth checker
         Random rand = new Random();
 
-        int letterIndex = rand.nextInt(5);
-        int numberIndex = rand.nextInt(15) + 1;
+        int value = rand.nextInt(75) + 1;
 
-        String newSpace = "BINGO".charAt(letterIndex) + Integer.toString(numberIndex + letterIndex * 15);
+        String newSpace = "BINGO".charAt((value - 1) / 15) + Integer.toString(value);
         
         int i = 0;
         while (calledSpaces[i] != null) {
             if (calledSpaces[i].equals(newSpace)) {
-                newSpace = Caller(1);
+                newSpace = caller(depth + 1);
             }
             i++;
         }
@@ -141,17 +140,33 @@ public class GameHander {
 
     public void run() {
         Scanner scanner = new Scanner(System.in);
+        selectUserCards(1);
 
-        System.out.println("How many cards would you like? (1-3)");
-        int cardCount = scanner.nextInt();
-        scanner.close();
+        // System.out.println("How many cards would you like? (1-3)");
+        // int cardCount = scanner.nextInt();
 
-        selectUserCards(cardCount);
-        
-        drawUserCards();
+        // scanner.close();
 
-        for (int i = 0; i < 75; i++) {
-            System.out.println(caller(0));
+        while (true) {
+            drawUserCards();
+
+            String callerValue = caller(0);
+            System.out.println(callerValue);
+
+            int x = scanner.nextInt();
+            int y = scanner.nextInt();
+
+            if ((x == -1) && (y == -1)) {
+                break;
+            }
+            if ((x == -1) || (y == -1)) {
+                continue;
+            }
+
+            userCards[0].stampLocation(x, y);
         }
+        System.out.println(userCards[0].validateCard(calledSpaces));
+
+        scanner.close();
     }
 }
