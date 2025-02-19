@@ -18,10 +18,28 @@ public class CardHandler {
         }
     }
 
-    public void stampLocation(int x, int y) {
-        cardSpaces[y*5+x] = "XX";
-    }
+    public boolean stampLocation(String location) {
+        for (int i = 0; i < cardSpaces.length; i++) {
+            if (location.equals("BINGO".charAt(i % 5) + cardSpaces[i])) {
+                cardSpaces[i] = "XX";
+                return true;
+            }
+        }
 
+        if (location.length() == 2) {
+            int x = "BINGO".indexOf(location.charAt(0));
+            int y = "BINGO".indexOf(location.charAt(1));
+    
+            if ((x == -1) || (y == -1)) {
+                return false;
+            }
+    
+            cardSpaces[y*5+x] = "XX";
+            return true;
+        }
+
+        return false;
+    }
 
     private boolean validateValue(String value, String[] calledSpaces) {
         int i = 0;
