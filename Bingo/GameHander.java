@@ -2,20 +2,22 @@ package Bingo;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
-import java.io.IOException;
 import java.util.Scanner;
 import java.util.Random;
 
 public class GameHander {
-    private CardHandler[] allCards;
     private int totalCardCount;
+    private CardHandler[] allCards;
     private CardHandler[] userCards;
     private String[] calledSpaces;
 
+    // [allCards] and [calledSpaces] default to be emptied out so they can be filled later.
     public GameHander() {
-        resetGame();
+        allCards = new CardHandler[20];
+        calledSpaces = new String[75];
     }
 
+    // Generates Cards from the [path to a formatted text file] adding all of them to [allCards] and returning [true] if successful or [false] if there was a problem.
     public boolean createCardsFromTxt(String path) {
         try {
             BufferedReader reader = new BufferedReader(new FileReader(path));
@@ -36,15 +38,15 @@ public class GameHander {
             }
             totalCardCount = i;
             reader.close();
-        } catch (IOException ex) {
-            ex.printStackTrace();
+        } catch (Exception e) {
             return false;
         }
 
         return true;
     }
 
-    private void randomSelectUserCards(int cardCount) { // maybe add another function to this
+    // Randomly Selects an amount of cards specified by [cardCount] from [allCards] with no repeats replacing [userCards] with the resulting array.
+    private void randomSelectUserCards(int cardCount) {
         Random rand = new Random();
 
         userCards = new CardHandler[cardCount];
@@ -54,33 +56,41 @@ public class GameHander {
             int selectedIndex = rand.nextInt(totalCardCount - i);
             userCards[i] = availableCards[selectedIndex];
 
-            CardHandler[] temp = new CardHandler[availableCards.length - 1];
+            CardHandler[] updatedAvailableCards = new CardHandler[availableCards.length - 1];
             for (int x = 0, y = 0; x < availableCards.length; x++) {
                 if (x != selectedIndex) {
-                    temp[y++] = availableCards[x];
+                    updatedAvailableCards[y++] = availableCards[x];
                 }
             }
 
-            availableCards = temp;
+            availableCards = updatedAvailableCards;
         }
     }
 
+    // Because of input checks this method looks more complicated than it really is. Basically it checks for empty indexs in [userCards] uses the [scanner]
+    // to ask the user to input the name of a card then checks if it exists and lastly checks if the card is already in [userCards].
     private void manualSelectUserCards(Scanner scanner, int cardCount) {
         userCards = new CardHandler[cardCount];
-        String userInput = null;
+        String userInput;
+
         boolean saveValue;
-        boolean foundCard = false;
+        boolean foundCard;
+
         int userCardsIndex = 0;
 
-        System.out.println("Enter the Name of the Card you Would Like to Use.");
         while ((userCardsIndex < cardCount) && (userCards[userCardsIndex] == null)) {
-            saveValue = true;
+            System.out.println("Enter the Name of a Card you Would Like to Use.");
             userInput = scanner.nextLine();
-            int allCardsIndex = 0;
-            while (allCards[allCardsIndex] != null) {
+
+            saveValue = true;
+            foundCard = false;
+
+            for (int allCardsIndex = 0; allCardsIndex < totalCardCount; allCardsIndex++) {
                 if (userInput.equals(allCards[allCardsIndex].getName())) {
-                    foundCard = true;
                     int userCardsRescanIndex = 0;
+
+                    foundCard = true;
+
                     while (userCards[userCardsRescanIndex] != null) {
                         if (userInput.equals(userCards[userCardsRescanIndex].getName())) {
                             System.out.println("Value: " + userInput + " has Already Been Taken");
@@ -89,29 +99,33 @@ public class GameHander {
                         }
                         userCardsRescanIndex++;
                     }
+
                     if (saveValue) {
                         userCards[userCardsRescanIndex] = allCards[allCardsIndex];
                         userCardsIndex++;
                     }
                     break;
                 }
-                allCardsIndex++;
             }
+
             if (!foundCard) {
                 System.out.println("Value: " + userInput + " is Not a Valid Card Name");
             }
         }
     }
 
+    // Draws all of [cards] cards onto screen formatted and next to each other horizontally.
     private void drawCards(CardHandler[] cards) {
         for (int card = 0; card < cards.length ; card++) {
             System.out.print("---------- " + cards[card].getName() + " ----------   ");
         }
         System.out.println();
+
         for (int card = 0; card < cards.length; card++) {
             System.out.print("   B    I    N    G    O      ");
         }
         System.out.println();
+
         for (int card = 0; card < cards.length; card++) {
             System.out.print("-+----+----+----+----+----+   ");
         }
@@ -125,6 +139,7 @@ public class GameHander {
                 System.out.print("   ");
             }
             System.out.println();
+
             for (int card = 0; card < cards.length; card++) {
                 System.out.print("-+----+----+----+----+----+   ");
             }
@@ -132,6 +147,7 @@ public class GameHander {
         }
     }
 
+    // Works similar to [drawCards] minus the fact that it can only display a single card at once.
     private void drawCard(CardHandler card) {
         System.out.print("---------- " + card.getName() + " ----------   \n");
         System.out.print("   B    I    N    G    O      \n");
@@ -145,20 +161,27 @@ public class GameHander {
         }
     }
 
-    private String randomCaller(int depth) { // might be able to change the depth checker also check if out of bounds
+    // Selects a random call space then checks [calledSpaces] to ensure it hasn't already been called if it has been called the method will call itself. if [i] reaches
+    // beyond 74 the total number of possible calls -1 it will return [null] to signify it's out of bounds. [depth] is just there so that values are only replaced
+    // when wanted. The new caller space [newSpace] is returned on success.
+    private String randomCaller(int depth) {
         Random rand = new Random();
-
         int value = rand.nextInt(75) + 1;
 
         String newSpace = "BINGO".charAt((value - 1) / 15) + Integer.toString(value);
         
         int i = 0;
-        while (calledSpaces[i] != null) {
+        while ((i <= 74) && (calledSpaces[i] != null)) {
             if (calledSpaces[i].equals(newSpace)) {
                 newSpace = randomCaller(depth + 1);
             }
             i++;
         }
+
+        if ((i >= 74) || (newSpace == null)) {
+            return null;
+        }
+
         if (depth == 0) {
             calledSpaces[i] = newSpace;
         }
@@ -166,12 +189,13 @@ public class GameHander {
         return newSpace;
     }
 
+    // Runs a series of checks to determine if [userInput] is a valid caller Value. Returns [true] while also adding it to called spaces if valid and [false] if not.
     private boolean maualCaller(String userInput) {
         if (userInput.length() < 2) {
             return false;
         }
 
-        int value = -1;
+        int value;
 
         try {
             value = Integer.parseInt(userInput.substring(1, userInput.length()));
@@ -183,41 +207,25 @@ public class GameHander {
             return false;
         }
 
-        if (userInput.equals(Character.toString("BINGO".charAt((value - 1) / 15)) + value)) {
-            return true;
-        }
-        
         int i = 0;
         while (calledSpaces[i] != null) {
             if (calledSpaces[i].equals(userInput)) {
                 return false;
             }
+
             i++;
+        }
+
+        if (userInput.equals(Character.toString("BINGO".charAt((value - 1) / 15)) + value)) {
+            calledSpaces[i] = userInput;
+            return true;
         }
 
         return false;
     }
 
-    private CardHandler[] returnBingos() {
-        CardHandler[] validatedCards = new CardHandler[userCards.length];
-
-        int i = 0;
-        for (CardHandler card : userCards) {
-            if (card.validateCard(calledSpaces)) {
-                System.out.println("true");
-                validatedCards[i] = card;
-                i++;
-            }
-        }
-
-        CardHandler[] returnCards = new CardHandler[i];
-        for (int j = 0; j < i; j++) {
-            returnCards[j] = validatedCards[j];
-        }
-
-        return returnCards;
-    }
-
+    // Checks to see if [userInput] assumably a card name is a valid cardName or not (can also take in an index of [userCards] just because).
+    // Finds and [returns the corresponding card] on success and [null] on a failure to find an associated card.
     private CardHandler isValidCard(String userInput) {
         for (CardHandler card : userCards) {
             if (card.getName().equals(userInput)) {
@@ -232,23 +240,46 @@ public class GameHander {
         }
     }
 
-    private void random(Scanner scanner) {
+    // Goes through userCards using the card's validateCard method to determine if it contains a Bingo. If so adds it to return cards and skips it if not.
+    // Either an [array of cards with Bingo] will be returned or an [empty array].
+    private CardHandler[] returnBingos() {
+        CardHandler[] validatedCards = new CardHandler[userCards.length];
+
+        int i = 0;
+        for (CardHandler card : userCards) {
+            if (card.validateCard(calledSpaces)) {
+                validatedCards[i] = card;
+                i++;
+            }
+        }
+
+        CardHandler[] returnCards = new CardHandler[i];
+        for (int j = 0; j < i; j++) {
+            returnCards[j] = validatedCards[j];
+        }
+
+        return returnCards;
+    }
+
+    // Holds all the terminal prompt messages and checks corresponding to a randomMode game.
+    private void randomMode(Scanner scanner) {
         String callerValue = randomCaller(0);
-        String userInput = null;
+        String userInput;
 
         while (true) {
+            System.out.println("\n");
             drawCards(userCards);
-            System.out.println("Called Position: " + callerValue);
+            System.out.println("Called Position: " + callerValue + "\n");
 
-            System.out.println("Enter Bingo to check for Bingo.");
-            System.out.println("What Card Would you Like to Stamp? (Card Name or Index): ");
-            System.out.println("Enter Call to call a new Location.");
+            System.out.println("Enter \"Bingo\" to check for Bingo.");
+            System.out.println("Enter \"Call\" to call a new Location.");
+            System.out.println("Or you can Stamp a Card. (Card Name or Index): ");
             userInput = scanner.nextLine();
 
             if (userInput.equals("Bingo")) {
                 CardHandler[] bingos = returnBingos();
                 if (bingos.length > 0) {
-                    System.out.println("Bingos Were Found on the Following Cards:");
+                    System.out.println("\n\nBingos Were Found on the Following Cards:");
                     drawCards(bingos);
                     break;
                 } else {
@@ -260,6 +291,9 @@ public class GameHander {
 
             if (userInput.equals("Call")) {
                 callerValue = randomCaller(0);
+                if (callerValue == null) {
+                    System.out.println("All Possible Calls have been Called");
+                }
                 continue;
             }
 
@@ -270,8 +304,9 @@ public class GameHander {
                 continue;
             }
 
+            System.out.println("\n");
             drawCard(selectedCard);
-            System.out.println("Called Position: " + callerValue);
+            System.out.println("Called Position: " + callerValue + "\n");
 
             System.out.println("What Position Would you Like to Stamp? (B-OB-O/B-0#)");
             String loaction = scanner.nextLine();
@@ -284,7 +319,8 @@ public class GameHander {
         }
     }
 
-    private void manual(Scanner scanner) {
+    // Holds all the terminal prompt messages and checks corresponding to a manualMode game.
+    private void manualMode(Scanner scanner) {
         System.out.println("Input the First Location to Call: ");
         String userInput = scanner.nextLine();
         String callerValue = userInput;
@@ -295,18 +331,19 @@ public class GameHander {
         }
 
         while (true) {
+            System.out.println("\n");
             drawCards(userCards);
-            System.out.println("Called Position: " + callerValue);
+            System.out.println("Called Position: " + callerValue + "\n");
 
-            System.out.println("Enter Bingo to check for Bingo.");
-            System.out.println("What Card Would you Like to Stamp? (Card Name or Index): ");
-            System.out.println("Enter Call to call a new Location.");
+            System.out.println("Enter \"Bingo\" to check for Bingo.");
+            System.out.println("Enter \"Call\" to call a new Location.");
+            System.out.println("Or you can Stamp a Card. (CardName or Index): ");
             userInput = scanner.nextLine();
 
             if (userInput.equals("Bingo")) {
                 CardHandler[] bingos = returnBingos();
                 if (bingos.length > 0) {
-                    System.out.println("Bingos Were Found on the Following Cards:");
+                    System.out.println("\n\nBingos Were Found on the Following Cards:");
                     drawCards(bingos);
                     break;
                 } else {
@@ -320,7 +357,7 @@ public class GameHander {
                 System.out.println("Input the Next Location to Call: ");
                 callerValue = scanner.nextLine();
                 while (!maualCaller(callerValue)) {
-                    System.out.println("Value: " + callerValue + "is an Invalid Caller Value or Has Already Been Called");
+                    System.out.println("Value: " + callerValue + " is an Invalid Caller Value or Has Already Been Called. Please enter a Location to Call: ");
                     callerValue = scanner.nextLine();
                 }
                 continue;
@@ -333,8 +370,9 @@ public class GameHander {
                 continue;
             }
 
+            System.out.println("\n");
             drawCard(selectedCard);
-            System.out.println("Called Position: " + callerValue);
+            System.out.println("Called Position: " + callerValue + "\n");
 
             System.out.println("What Position Would you Like to Stamp? (B-OB-O/B-0#)");
             String loaction = scanner.nextLine();
@@ -347,11 +385,7 @@ public class GameHander {
         }
     }
 
-    private void resetGame() {
-        allCards = new CardHandler[20];
-        calledSpaces = new String[75];
-    }
-
+    // Holds all the terminal prompt messages and checks so that either game mode can start correctly. (Sets amount of cards and asks what gamemode to use).
     public void run() {
         Scanner scanner = new Scanner(System.in);
 
@@ -383,12 +417,12 @@ public class GameHander {
 
         if (userInput.equals("Random")) {
             randomSelectUserCards(cardCount);
-            random(scanner);
+            randomMode(scanner);
         }
 
         if (userInput.equals("Manual")) {
             manualSelectUserCards(scanner, cardCount);
-            manual(scanner);
+            manualMode(scanner);
         }
 
         scanner.close();
