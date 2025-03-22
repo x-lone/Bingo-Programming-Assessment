@@ -43,6 +43,19 @@ public class Pattern {
         return false;
     }
 
+    public boolean checkDiagonal(CardHandler card) {
+        for (int i = 0; i < 5; i++) {
+            if (card.cardSpaces[i*5+i] != "XX") {
+                break;
+            }
+            if (i == 4) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
     public boolean checkCard(CardHandler card) {
         switch (patternType) {
             case "Row Pattern":
