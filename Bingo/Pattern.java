@@ -13,7 +13,7 @@ public class Pattern {
         this.customPattern = coordinates;
     }
 
-    public boolean checkRows(CardHandler card) {
+    private boolean checkRows(CardHandler card) {
         for (int y = 0; y < 5; y++) {
             for (int x = 0; x < 5; x++) {
                 if (card.cardSpaces[y*5+x] != "XX") {
@@ -28,7 +28,7 @@ public class Pattern {
         return false;
     }
 
-    public boolean checkColumns(CardHandler card) {
+    private boolean checkColumns(CardHandler card) {
         for (int x = 0; x < 5; x++) {
             for (int y = 0; y < 5; y++) {
                 if (card.cardSpaces[y*5+x] != "XX") {
@@ -43,7 +43,7 @@ public class Pattern {
         return false;
     }
 
-    public boolean checkDiagonals(CardHandler card) {
+    private boolean checkDiagonals(CardHandler card) {
         for (int i = 0; i < 5; i++) {
             if (card.cardSpaces[i*5+i] != "XX") {
                 break;
@@ -65,7 +65,7 @@ public class Pattern {
         return false;
     }
 
-    public boolean checkCustom(CardHandler card) {
+    private boolean checkCustom(CardHandler card) {
         for (int i = 0; i < customPattern.length; i++) {
             if (card.cardSpaces[customPattern[i][1]*5+customPattern[i][0]] != "XX") {
                 break;
@@ -87,7 +87,7 @@ public class Pattern {
             case "Diagonal Pattern":
                 return checkDiagonals(card);
             case "Custom Pattern":
-                break;
+                return checkCustom(card);
             default:
                 break;
         }
