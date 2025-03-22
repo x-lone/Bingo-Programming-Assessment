@@ -65,6 +65,19 @@ public class Pattern {
         return false;
     }
 
+    public boolean checkCustom(CardHandler card) {
+        for (int i = 0; i < customPattern.length; i++) {
+            if (card.cardSpaces[customPattern[i][1]*5+customPattern[i][0]] != "XX") {
+                break;
+            } 
+            if (i == customPattern.length) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
     public boolean checkCard(CardHandler card) {
         switch (patternType) {
             case "Row Pattern":
