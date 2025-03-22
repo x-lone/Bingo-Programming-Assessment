@@ -146,4 +146,17 @@ public class PatternTest {
         
         assertEquals(true, pattern.checkCard(card));
     }
+    @Test
+    public void P12() {
+        Pattern pattern = new Pattern("Diagonal Pattern");
+        CardHandler card = new CardHandler("card4", "12,23,31,48,62,7,19,32,60,75,3,21,45,57,73,8,30,44,58,65,9,22,35,50,68");
+
+        card.stampLocation("BI");
+        card.stampLocation("II");
+        card.stampLocation("NI");
+        card.stampLocation("GI");
+        card.stampLocation("OI");
+        
+        assertEquals(true, pattern.checkCard(card));
+    }
 }
