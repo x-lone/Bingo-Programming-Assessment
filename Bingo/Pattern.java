@@ -16,7 +16,12 @@ public class Pattern {
     public boolean checkRow(CardHandler card) {
         for (int y = 0; y < 5; y++) {
             for (int x = 0; x < 5; x++) {
-                
+                if (card.cardSpaces[y*5+x] != "XX") {
+                    break;
+                }
+                if (x == 4) {
+                    return true;
+                }
             }
         }
 
@@ -26,7 +31,7 @@ public class Pattern {
     public boolean checkCard(CardHandler card) {
         switch (patternType) {
             case "Row Pattern":
-                break;
+                return checkRow(card);
             case "Column Pattern":
                 break;
             case "Diagonal Pattern":
