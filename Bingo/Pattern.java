@@ -43,7 +43,7 @@ public class Pattern {
         return false;
     }
 
-    public boolean checkDiagonal(CardHandler card) {
+    public boolean checkDiagonals(CardHandler card) {
         for (int i = 0; i < 5; i++) {
             if (card.cardSpaces[i*5+i] != "XX") {
                 break;
