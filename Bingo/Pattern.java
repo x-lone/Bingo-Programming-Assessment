@@ -48,7 +48,7 @@ public class Pattern {
             case "Row Pattern":
                 return checkRow(card);
             case "Column Pattern":
-                break;
+                return checkColumns(card);
             case "Diagonal Pattern":
                 break;
             case "Custom Pattern":
