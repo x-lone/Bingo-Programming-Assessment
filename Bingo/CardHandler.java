@@ -47,7 +47,7 @@ public class CardHandler {
     }
 
     // Checks to see if [value] has been added to [calledSpaces] returning [true] if thats the case or [false] if not.
-    private boolean validateValue(String value, String[] calledSpaces) {
+    public boolean validateValue(String value, String[] calledSpaces) {
         int i = 0;
         while (((i < 75) && calledSpaces[i] != null)) {
             if (calledSpaces[i].equals(value)) {
