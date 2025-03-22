@@ -3,7 +3,7 @@ package Bingo;
 public class CardHandler {
     private String name;
     private int[] cardValues;
-    private String[] cardSpaces;
+    public String[] cardSpaces;
 
     // Generates a CardHandler Class using a name and a comma separated unformatted (not worring about extra spaces) string.
     // The values obtained from [cardValues] are then turned into a 1 dimensional array.
@@ -47,7 +47,7 @@ public class CardHandler {
     }
 
     // Checks to see if [value] has been added to [calledSpaces] returning [true] if thats the case or [false] if not.
-    public boolean validateValue(String value, String[] calledSpaces) {
+    private boolean validateValue(String value, String[] calledSpaces) {
         int i = 0;
         while (((i < 75) && calledSpaces[i] != null)) {
             if (calledSpaces[i].equals(value)) {
