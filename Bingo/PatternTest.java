@@ -70,7 +70,6 @@ public class PatternTest {
         
         assertEquals(true, pattern.checkCard(card));
     }
-
     @Test
     public void P6() {
         Pattern pattern = new Pattern("Column Pattern");
@@ -81,6 +80,19 @@ public class PatternTest {
         card.stampLocation("GN");
         card.stampLocation("GG");
         card.stampLocation("GO");
+        
+        assertEquals(true, pattern.checkCard(card));
+    }
+    @Test
+    public void P7() {
+        Pattern pattern = new Pattern("Column Pattern");
+        CardHandler card = new CardHandler("card8", "13,20,35,58,69,3,22,39,54,74,1,17,34,55,75,2,25,45,57,73,11,21,31,52,70");
+
+        card.stampLocation("OB");
+        card.stampLocation("OI");
+        card.stampLocation("ON");
+        card.stampLocation("OG");
+        card.stampLocation("OO");
         
         assertEquals(true, pattern.checkCard(card));
     }
