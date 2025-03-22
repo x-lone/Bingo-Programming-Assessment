@@ -165,7 +165,15 @@ public class PatternTest {
         Pattern pattern = new Pattern(customPattern);
         CardHandler card = new CardHandler("card5", "11,27,44,60,64,5,26,38,54,73,15,17,41,55,70,2,29,43,51,74,3,18,39,48,63");
 
-        
+        card.stampLocation("BB");
+        card.stampLocation("IB");
+        card.stampLocation("NB");
+        card.stampLocation("GB");
+        card.stampLocation("OB");
+        card.stampLocation("NI");
+        card.stampLocation("NN");
+        card.stampLocation("NG");
+        card.stampLocation("NO");
         
         assertEquals(true, pattern.checkCard(card));
     }

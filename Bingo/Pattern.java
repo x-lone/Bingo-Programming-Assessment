@@ -70,7 +70,7 @@ public class Pattern {
             if (card.cardSpaces[customPattern[i][1]*5+customPattern[i][0]] != "XX") {
                 break;
             } 
-            if (i == customPattern.length) {
+            if (i == customPattern.length - 1) {
                 return true;
             }
         }
