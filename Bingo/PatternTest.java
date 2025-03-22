@@ -96,4 +96,17 @@ public class PatternTest {
         
         assertEquals(true, pattern.checkCard(card));
     }
+    @Test
+    public void P8() {
+        Pattern pattern = new Pattern("Column Pattern");
+        CardHandler card = new CardHandler("card9", "5,22,37,47,65,7,21,33,59,71,4,26,45,58,66,10,27,41,60,68,11,25,35,57,64");
+
+        card.stampLocation("BB");
+        card.stampLocation("IB");
+        card.stampLocation("NB");
+        card.stampLocation("GB");
+        card.stampLocation("OB");
+        
+        assertEquals(true, pattern.checkCard(card));
+    }
 }
