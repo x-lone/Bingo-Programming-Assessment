@@ -53,6 +53,15 @@ public class Pattern {
             }
         }
 
+        for (int i = 0; i < 5; i++) {
+            if (card.cardSpaces[i*5+(4-i)] != "XX") {
+                break;
+            }
+            if (i == 4) {
+                return true;
+            }
+        }
+
         return false;
     }
 
