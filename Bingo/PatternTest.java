@@ -32,4 +32,17 @@ public class PatternTest {
         
         assertEquals(true, pattern.checkCard(card));
     }
+    @Test
+    public void P3() {
+        Pattern pattern = new Pattern("Row Pattern");
+        CardHandler card = new CardHandler("card1", "3,22,32,51,66,6,19,44,60,61,7,27,45,58,72,15,16,48,46,75,1,30,31,52,63");
+
+        card.stampLocation("BO");
+        card.stampLocation("IO");
+        card.stampLocation("NO");
+        card.stampLocation("GO");
+        card.stampLocation("OO");
+        
+        assertEquals(true, pattern.checkCard(card));
+    }
 }
