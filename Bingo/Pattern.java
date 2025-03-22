@@ -13,7 +13,7 @@ public class Pattern {
         this.customPattern = coordinates;
     }
 
-    public boolean checkRow(CardHandler card) {
+    public boolean checkRows(CardHandler card) {
         for (int y = 0; y < 5; y++) {
             for (int x = 0; x < 5; x++) {
                 if (card.cardSpaces[y*5+x] != "XX") {
@@ -68,11 +68,11 @@ public class Pattern {
     public boolean checkCard(CardHandler card) {
         switch (patternType) {
             case "Row Pattern":
-                return checkRow(card);
+                return checkRows(card);
             case "Column Pattern":
                 return checkColumns(card);
             case "Diagonal Pattern":
-                break;
+                return checkDiagonals(card);
             case "Custom Pattern":
                 break;
             default:
