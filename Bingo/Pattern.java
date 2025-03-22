@@ -28,6 +28,21 @@ public class Pattern {
         return false;
     }
 
+    public boolean checkColumns(CardHandler card) {
+        for (int x = 0; x < 5; x++) {
+            for (int y = 0; y < 5; y++) {
+                if (card.cardSpaces[y*5+x] != "XX") {
+                    break;
+                }
+                if (y == 4) {
+                    return true;
+                }
+            }
+        }
+
+        return false;
+    }
+
     public boolean checkCard(CardHandler card) {
         switch (patternType) {
             case "Row Pattern":
