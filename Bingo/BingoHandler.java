@@ -11,8 +11,7 @@ public class BingoHandler {
     private CardHandler[] allCards;
     private CardHandler[] userCards;
     private String[] calledSpaces;
-    private List<String> validPatterns;
-    private Pattern[] validCustomPatterns;
+    private List<Pattern> validPatterns;
 
     // [allCards] and [calledSpaces] default to be emptied out so they can be filled later.
     public BingoHandler() {
@@ -267,9 +266,9 @@ public class BingoHandler {
     private void addPattern(String patternType) {
         switch (patternType) {
             case "Row Pattern":
-                if (!validPatterns.contains("Row Pattern")) {
-                    validPatterns.add("Row Pattern");
-                }
+                Pattern newPattern = new Pattern("Row Pattern");
+                validPatterns.add(newPattern);
+                break;
             default:
                 break;
         }
@@ -278,8 +277,10 @@ public class BingoHandler {
     private int countBingos(CardHandler card) {
         int bingos = 0;
 
-        if (validPatterns.contains("Row Pattern")) {
-            
+        for (Pattern pattern : validPatterns) {
+            while (pattern.checkCard(card)) {
+                bingos++;
+            }
         }
 
         return bingos;
