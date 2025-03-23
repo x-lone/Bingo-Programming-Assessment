@@ -166,7 +166,20 @@ public class BingoHandlerTest {
         int[][] customPatternSquare = {{0,0},{1,0},{2,0},{3,0},{4,0},{0,4},{1,4},{2,4},{3,4},{4,4},{0,1},{0,2},{0,3},{4,1},{4,2},{4,3}};
         bingoHandler.addPattern(customPatternSquare);
 
-        
+        for (int y = 0; y < 2; y++) {
+            for (int x = 0; x < 5; x++) {
+                bingoHandler.allCards[0].stampLocation(""+"BINGO".charAt(x)+"BINGO".charAt(y));
+            }
+        }
+        for (int y = 3; y < 5; y++) {
+            for (int x = 0; x < 5; x++) {
+                bingoHandler.allCards[0].stampLocation(""+"BINGO".charAt(x)+"BINGO".charAt(y));
+            }
+        }
+        bingoHandler.allCards[0].stampLocation("BN");
+        for (int x = 2; x < 5; x++) {
+            bingoHandler.allCards[0].stampLocation(""+"BINGO".charAt(x)+"N");
+        }       
 
         assertEquals(12, bingoHandler.countBingos(bingoHandler.allCards[0]));
     }
