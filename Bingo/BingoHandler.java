@@ -253,9 +253,9 @@ public class BingoHandler {
             card.validateCard(calledSpaces);
             if (countBingos(card) > 0) {
                 validatedCards[i] = card;
-                card.undoValidateCard();
                 i++;
             }
+            card.undoValidateCard();
         }
 
         CardHandler[] returnCards = new CardHandler[i];
