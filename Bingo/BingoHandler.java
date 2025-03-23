@@ -284,6 +284,12 @@ public class BingoHandler {
         }
     }
 
+    public void addPattern(int[][] coordinates) {
+        Pattern newPattern = null;
+        newPattern = new Pattern(coordinates);
+        validPatterns.add(newPattern);
+    }
+
     public int countBingos(CardHandler card) {
         int bingos = 0;
 
