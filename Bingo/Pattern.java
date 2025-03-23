@@ -35,6 +35,7 @@ public class Pattern {
                 if (card.cardSpaces[y*5+x] != "XX") {
                     break;
                 }
+                card.cardSpaces[y*5+x] = "--";
                 if (y == 4) {
                     return true;
                 }

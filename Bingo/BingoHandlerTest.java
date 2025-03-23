@@ -57,8 +57,15 @@ public class BingoHandlerTest {
         bingoHandler.addPattern("Row Pattern");
         bingoHandler.addPattern("Column Pattern");
 
+        for (int y = 0; y < 5; y+=2) {
+            for (int x = 0; x < 5; x++) {
+                bingoHandler.allCards[3].stampLocation(""+"BINGO".charAt(x)+"BINGO".charAt(y));
+            }
+        }
+        for (int y = 0; y < 5; y++) {
+            bingoHandler.allCards[3].stampLocation("O"+"BINGO".charAt(y));
+        }
 
-
-        assertEquals(3, bingoHandler.countBingos(bingoHandler.allCards[2]));
+        assertEquals(4, bingoHandler.countBingos(bingoHandler.allCards[3]));
     }
 }

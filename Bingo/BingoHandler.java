@@ -287,6 +287,7 @@ public class BingoHandler {
             while (pattern.checkCard(card)) {
                 bingos++;
             }
+            pattern.resetCheckedSpaces(card);
         }
 
         return bingos;
