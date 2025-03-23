@@ -6,6 +6,12 @@ import org.junit.Test;
 
 // Unit tests to ensure the methods of Pattern works as expected. 
 public class PatternTest {
+    // Tests Row Pattern > Expected Output: true
+    // X X X X X
+    // O O O O O
+    // O O O O O
+    // O O O O O
+    // O O O O O
     @Test
     public void P1() {
         Pattern pattern = new Pattern("Row Pattern");
@@ -19,6 +25,13 @@ public class PatternTest {
         
         assertEquals(true, pattern.checkCard(card));
     }
+
+    // Tests Row Pattern > Expected Output: true
+    // O O O O O
+    // O O O O O
+    // X X X X X
+    // O O O O O
+    // O O O O O
     @Test
     public void P2() {
         Pattern pattern = new Pattern("Row Pattern");
