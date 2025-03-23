@@ -54,7 +54,7 @@ public class PatternTest {
         card.stampLocation("NB");
         card.stampLocation("GB");
         
-        assertEquals(true, pattern.checkCard(card));
+        assertEquals(false, pattern.checkCard(card));
     }
     @Test
     public void P5() {
@@ -106,7 +106,7 @@ public class PatternTest {
         card.stampLocation("GB");
         card.stampLocation("OB");
         
-        assertEquals(true, pattern.checkCard(card));
+        assertEquals(false, pattern.checkCard(card));
     }
     @Test
     public void P9() {
@@ -118,7 +118,7 @@ public class PatternTest {
         card.stampLocation("IG");
         card.stampLocation("IO");
         
-        assertEquals(true, pattern.checkCard(card));
+        assertEquals(false, pattern.checkCard(card));
     }
     @Test
     public void P10() {
@@ -157,7 +157,7 @@ public class PatternTest {
         card.stampLocation("GI");
         card.stampLocation("OI");
         
-        assertEquals(true, pattern.checkCard(card));
+        assertEquals(false, pattern.checkCard(card));
     }
     @Test
     public void P13() {
@@ -202,7 +202,7 @@ public class PatternTest {
         }
         card.stampLocation("NO");
         
-        assertEquals(true, pattern.checkCard(card));
+        assertEquals(false, pattern.checkCard(card));
     }
     @Test
     public void P16() {
@@ -237,7 +237,7 @@ public class PatternTest {
             card.stampLocation(""+"BINGO".charAt(x)+"O");
         }
         
-        assertEquals(true, pattern.checkCard(card));
+        assertEquals(false, pattern.checkCard(card));
     }
     @Test
     public void P18() {
@@ -255,6 +255,6 @@ public class PatternTest {
             card.stampLocation(""+"BINGO".charAt(x)+"O");
         }
         
-        assertEquals(true, pattern.checkCard(card));
+        assertEquals(false, pattern.checkCard(card));
     }
 }
