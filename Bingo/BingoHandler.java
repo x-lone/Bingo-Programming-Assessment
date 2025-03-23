@@ -275,6 +275,16 @@ public class BingoHandler {
         }
     }
 
+    private int countBingos(CardHandler card) {
+        int bingos = 0;
+
+        if (validPatterns.contains("Row Pattern")) {
+            
+        }
+
+        return bingos;
+    }
+
     // Holds all the terminal prompt messages and checks corresponding to a randomMode game.
     private void randomMode(Scanner scanner) {
         String callerValue = randomCaller(0);
