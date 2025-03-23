@@ -243,8 +243,8 @@ public class BingoHandler {
         }
     }
 
-    // Goes through userCards using the card's validateCard method to determine if it contains a Bingo. If so adds it to return cards and skips it if not.
-    // Either an [array of cards with Bingo] will be returned or an [empty array].
+    // Goes through userCards using the card's validateCard method to first ensure that only valid bingos will be counted then uses countBingos to ensure that the card.
+    // has at least one bingo. If so adds it to return cards and skips it if not. Either an [array of cards with Bingo] will be returned or an [empty array].
     private CardHandler[] returnBingos() {
         CardHandler[] validatedCards = new CardHandler[userCards.length];
 
@@ -266,6 +266,8 @@ public class BingoHandler {
         return returnCards;
     }
 
+    // Can be used to add a predefined [patternType] which can only be one of 3 values ("Row Pattern", "Column Pattern", or "Diagonal Pattern") and adds it to validPatterns.
+    // Can be added multiple times and does nothing if a undefined (String patternType) is inputted.
     public void addPattern(String patternType) {
         Pattern newPattern = null;
         switch (patternType) {
@@ -278,12 +280,16 @@ public class BingoHandler {
         }
     }
 
+    // Works the same as the above add pattern although it takes in a list of [coordinates] -> (int[][]) == {{x,y},...} creating a new pattern that must match each
+    // coordinate to be a valid bingo.
     public void addPattern(int[][] coordinates) {
         Pattern newPattern = null;
         newPattern = new Pattern(coordinates);
         validPatterns.add(newPattern);
     }
 
+    // takes in a [CardHandler card] and uses (validPatterns) to scan through each possible bingo type and location for a bingo and if a bingo is found the return value
+    // [bingos] is incremented by one.
     public int countBingos(CardHandler card) {
         int bingos = 0;
 
