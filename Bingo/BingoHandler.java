@@ -3,6 +3,7 @@ package Bingo;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.util.Scanner;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
@@ -11,7 +12,7 @@ public class BingoHandler {
     public CardHandler[] allCards;
     private CardHandler[] userCards;
     private String[] calledSpaces;
-    private List<Pattern> validPatterns;
+    private List<Pattern> validPatterns = new ArrayList<>();
 
     // [allCards] and [calledSpaces] default to be emptied out so they can be filled later.
     public BingoHandler() {
