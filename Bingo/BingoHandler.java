@@ -5,14 +5,14 @@ import java.io.FileReader;
 import java.util.Scanner;
 import java.util.Random;
 
-public class GameHander {
+public class BingoHandler {
     private int totalCardCount;
     private CardHandler[] allCards;
     private CardHandler[] userCards;
     private String[] calledSpaces;
 
     // [allCards] and [calledSpaces] default to be emptied out so they can be filled later.
-    public GameHander() {
+    public BingoHandler() {
         allCards = new CardHandler[20];
         calledSpaces = new String[75];
     }

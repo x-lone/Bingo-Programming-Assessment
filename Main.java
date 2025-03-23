@@ -2,11 +2,11 @@
 //  Started: Feb 3, 2025
 // Finished: Feb 18, 2025
 
-import Bingo.GameHander;
+import Bingo.BingoHandler;
 
 public class Main {
     public static void main(String[] args) {
-        GameHander game = new GameHander();
+        BingoHandler game = new BingoHandler();
 
         if (game.createCardsFromTxt("BingoCards.txt")) {
             game.run();
