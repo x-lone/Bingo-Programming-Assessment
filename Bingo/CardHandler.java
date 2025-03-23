@@ -72,21 +72,6 @@ public class CardHandler {
             }
         }
         
-        // Check for Columns
-        for (int x = 0; x < 5; x++) {
-            for (int y = 0; y < 5; y++) {
-                if (!validateValue("BINGO".charAt(x) + Integer.toString(cardValues[y*5+x]), calledSpaces)) {
-                    break;
-                }
-                if (cardSpaces[y*5+x] != "XX") {
-                    break;
-                }
-                if (y == 4) {
-                    return true;
-                }
-            }
-        }
-
         // Checks for TopLeft to BottomRight
         for (int i = 0; i < 5; i++) {
             if (!validateValue("BINGO".charAt(i) + Integer.toString(cardValues[i*5+i]), calledSpaces)) {
