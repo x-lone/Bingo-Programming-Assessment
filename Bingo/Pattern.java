@@ -50,6 +50,9 @@ public class Pattern {
             if (card.cardSpaces[i*5+i] != "XX") {
                 break;
             }
+            if (i != 2) {
+                card.cardSpaces[i*5+i] = "--";
+            }
             if (i == 4) {
                 return true;
             }
@@ -58,6 +61,9 @@ public class Pattern {
         for (int i = 0; i < 5; i++) {
             if (card.cardSpaces[i*5+(4-i)] != "XX") {
                 break;
+            }
+            if (i != 2) {
+                card.cardSpaces[i*5+(4-i)] = "--";
             }
             if (i == 4) {
                 return true;
@@ -72,6 +78,7 @@ public class Pattern {
             if (card.cardSpaces[customPattern[i][1]*5+customPattern[i][0]] != "XX") {
                 break;
             } 
+            card.cardSpaces[customPattern[i][1]*5+customPattern[i][0]] = "--";
             if (i == customPattern.length - 1) {
                 return true;
             }
