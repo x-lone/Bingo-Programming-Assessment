@@ -268,18 +268,10 @@ public class BingoHandler {
         Pattern newPattern = null;
         switch (patternType) {
             case "Row Pattern":
-                newPattern = new Pattern("Row Pattern");
-                validPatterns.add(newPattern);
-                break;
             case "Column Pattern":
-                newPattern = new Pattern("Column Pattern");
-                validPatterns.add(newPattern);
-                break;
             case "Diagonal Pattern":
-                newPattern = new Pattern("Diagonal Pattern");
+                newPattern = new Pattern(patternType);
                 validPatterns.add(newPattern);
-                break;
-            default:
                 break;
         }
     }

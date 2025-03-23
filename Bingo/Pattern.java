@@ -107,8 +107,6 @@ public class Pattern {
                 return checkDiagonals(card);
             case "Custom Pattern":
                 return checkCustom(card);
-            default:
-                break;
         }
 
         return false;
