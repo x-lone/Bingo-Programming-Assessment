@@ -60,7 +60,13 @@ public class CardHandler {
     }
 
     public void undoValidateCard() {
-        
+        for (int y = 0; y < 5; y++) {
+            for (int x = 0; x < 5; x++) {
+                if (cardSpaces[y*5+x] == "||") {
+                    cardSpaces[y*5+x] = "XX";
+                }
+            }
+        }    
     }
 
     public void validateCard(String[] calledSpaces) {
