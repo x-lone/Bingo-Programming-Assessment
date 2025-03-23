@@ -8,7 +8,7 @@ import java.util.Random;
 
 public class BingoHandler {
     private int totalCardCount;
-    private CardHandler[] allCards;
+    public CardHandler[] allCards;
     private CardHandler[] userCards;
     private String[] calledSpaces;
     private List<Pattern> validPatterns;
