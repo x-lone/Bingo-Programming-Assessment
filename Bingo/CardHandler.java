@@ -62,6 +62,16 @@ public class CardHandler {
     // Checks all the possible winning conditions to see if there was a bingo which is both valid and only contains spaces which have been called and inside [calledSpaces]
     // returns [true] at the first instance and [false] if the end of the method is reached without finding anything.
     public boolean validateCard(String[] calledSpaces) {
+        for (int y = 0; y < 5; y++) {
+            for (int x = 0; x < 5; x++) {
+                if (cardSpaces[y*5+x] == "XX") {
+                    if (!validateValue("BINGO".charAt(x) + Integer.toString(cardValues[y*5+x]), calledSpaces)) {
+                        cardSpaces[y*5+x] = "||";
+                    }
+                }
+            }
+        }
+        
         // Checks for Rows
         for (int y = 0; y < 5; y++) {
             for (int x = 0; x < 5; x++) {
