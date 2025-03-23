@@ -268,6 +268,13 @@ public class PatternTest {
         
         assertEquals(true, pattern.checkCard(card));
     }
+    
+    // Tests Custom Pattern Toprow & Middle Column (the "T") > Expected Output: true
+    // X X X X X
+    // X X X X X
+    // X X X X X
+    // X X X X X
+    // X X X X X
     @Test
     public void P14() {
         int[][] customPattern = {{0,0},{1,0},{2,0},{3,0},{4,0},{2,1},{2,2},{2,3},{2,4}};
@@ -282,6 +289,13 @@ public class PatternTest {
         
         assertEquals(true, pattern.checkCard(card));
     }
+    
+    // Tests Custom Pattern Toprow & Middle Column (the "T") > Expected Output: true
+    // X X X X X
+    // X X X X X
+    // X X O X X
+    // X X X X X
+    // X X X X X
     @Test
     public void P15() {
         int[][] customPattern = {{0,0},{1,0},{2,0},{3,0},{4,0},{2,1},{2,2},{2,3},{2,4}};
