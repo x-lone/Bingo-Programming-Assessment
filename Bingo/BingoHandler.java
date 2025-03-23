@@ -250,8 +250,10 @@ public class BingoHandler {
 
         int i = 0;
         for (CardHandler card : userCards) {
-            if (card.validateCard(calledSpaces)) {
+            card.validateCard(calledSpaces);
+            if (countBingos(card) > 0) {
                 validatedCards[i] = card;
+                card.undoValidateCard();
                 i++;
             }
         }

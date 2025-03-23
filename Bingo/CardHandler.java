@@ -59,8 +59,10 @@ public class CardHandler {
         return false;
     }
 
-    // Checks all the possible winning conditions to see if there was a bingo which is both valid and only contains spaces which have been called and inside [calledSpaces]
-    // returns [true] at the first instance and [false] if the end of the method is reached without finding anything.
+    public void undoValidateCard() {
+        
+    }
+
     public void validateCard(String[] calledSpaces) {
         for (int y = 0; y < 5; y++) {
             for (int x = 0; x < 5; x++) {
