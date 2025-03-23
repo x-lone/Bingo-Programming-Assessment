@@ -6,6 +6,12 @@ import org.junit.Test;
 
 // Unit tests to ensure the methods of BingoHandler works as expected. 
 public class BingoHandlerTest {
+    // Tests Rows > Expected Output: true
+    // X X X X X
+    // O O O O O
+    // O O O O O
+    // O O O O O
+    // O O O O O
     @Test
     public void BM1() {
         BingoHandler bingoHandler = new BingoHandler();
@@ -20,6 +26,13 @@ public class BingoHandlerTest {
 
         assertEquals(1, bingoHandler.countBingos(bingoHandler.allCards[0]));
     }
+
+    // Tests Rows > Expected Output: true
+    // O O O O O
+    // O O O O O
+    // X X X X X
+    // O O O O O
+    // O O O O O
     @Test
     public void BM2() {
         BingoHandler bingoHandler = new BingoHandler();
