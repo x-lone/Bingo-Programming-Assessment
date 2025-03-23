@@ -214,12 +214,13 @@ public class BingoHandlerTest {
         assertEquals(11, bingoHandler.countBingos(bingoHandler.allCards[7]));
     }
 
-    // Tests Column Pattern > Expected Output: false
+    // Tests Row Pattern, Column Pattern, Diagonal Pattern, Custom Pattern: Toprow & Middle Column (the "T"),
+    // and Custom Pattern: top row, bottom row, left column, and right column (a square) > Expected Output: 12
     // X X X X X
-    // O O O O O
-    // O O O O O
-    // O O O O O
-    // O O O O O
+    // X X X X X
+    // X O X X X
+    // X X X X X
+    // X X X X X
     @Test
     public void BM9() {
         BingoHandler bingoHandler = new BingoHandler();
