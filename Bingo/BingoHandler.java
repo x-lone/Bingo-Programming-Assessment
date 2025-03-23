@@ -275,6 +275,10 @@ public class BingoHandler {
                 newPattern = new Pattern("Column Pattern");
                 validPatterns.add(newPattern);
                 break;
+            case "Diagonal Pattern":
+                newPattern = new Pattern("Diagonal Pattern");
+                validPatterns.add(newPattern);
+                break;
             default:
                 break;
         }
