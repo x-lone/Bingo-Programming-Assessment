@@ -124,6 +124,13 @@ public class PatternTest {
         
         assertEquals(true, pattern.checkCard(card));
     }
+
+    // Tests Column Pattern > Expected Output: true
+    // O O O O X
+    // O O O O X
+    // O O O O X
+    // O O O O X
+    // O O O O X
     @Test
     public void P7() {
         Pattern pattern = new Pattern("Column Pattern");
@@ -137,6 +144,13 @@ public class PatternTest {
         
         assertEquals(true, pattern.checkCard(card));
     }
+
+    // Tests Column Pattern > Expected Output: false
+    // X X X X X
+    // O O O O O
+    // O O O O O
+    // O O O O O
+    // O O O O O
     @Test
     public void P8() {
         Pattern pattern = new Pattern("Column Pattern");
