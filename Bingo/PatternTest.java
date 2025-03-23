@@ -246,7 +246,7 @@ public class PatternTest {
         CardHandler card = new CardHandler("Card2", "9,17,33,56,68,6,30,34,46,70,7,26,37,58,66,5,25,39,47,62,13,22,44,57,72");
 
         for (int x = 1; x < 5; x++) {
-            card.stampLocation(""+"BINGO".charAt(x)+"O");
+            card.stampLocation(""+"BINGO".charAt(x)+"B");
         }
         for (int x = 0; x < 5; x++) {
             card.stampLocation(""+"BINGO".charAt(x)+"I");
