@@ -208,7 +208,7 @@ public class PatternTest {
     public void P16() {
         int[][] customPattern = {{0,0},{1,0},{2,0},{3,0},{4,0},{0,4},{1,4},{2,4},{3,4},{4,4},{0,1},{0,2},{0,3},{4,1},{4,2},{4,3}};
         Pattern pattern = new Pattern(customPattern);
-        CardHandler card = new CardHandler("card8", "13,20,35,58,69,3,22,39,54,74,1,17,34,55,75,2,25,45,57,73,11,21,31,52,70");
+        CardHandler card = new CardHandler("card9", "5,22,37,47,65,7,21,33,59,71,4,26,45,58,66,10,27,41,60,68,11,25,35,57,64");
 
         for (int y = 0; y < 5; y++) {
             card.stampLocation(""+"BINGO".charAt(y)+"B");
