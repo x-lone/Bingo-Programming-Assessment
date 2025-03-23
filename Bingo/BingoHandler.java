@@ -3,6 +3,7 @@ package Bingo;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.util.Scanner;
+import java.util.List;
 import java.util.Random;
 
 public class BingoHandler {
@@ -10,6 +11,8 @@ public class BingoHandler {
     private CardHandler[] allCards;
     private CardHandler[] userCards;
     private String[] calledSpaces;
+    private List<String> validPatterns;
+    private Pattern[] validCustomPatterns;
 
     // [allCards] and [calledSpaces] default to be emptied out so they can be filled later.
     public BingoHandler() {
@@ -259,6 +262,17 @@ public class BingoHandler {
         }
 
         return returnCards;
+    }
+
+    private void addPattern(String patternType) {
+        switch (patternType) {
+            case "Row Pattern":
+                if (!validPatterns.contains("Row Pattern")) {
+                    validPatterns.add("Row Pattern");
+                }
+            default:
+                break;
+        }
     }
 
     // Holds all the terminal prompt messages and checks corresponding to a randomMode game.
