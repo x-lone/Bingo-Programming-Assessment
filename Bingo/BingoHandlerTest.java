@@ -50,4 +50,15 @@ public class BingoHandlerTest {
 
         assertEquals(3, bingoHandler.countBingos(bingoHandler.allCards[2]));
     }
+    @Test
+    public void BM4() {
+        BingoHandler bingoHandler = new BingoHandler();
+        bingoHandler.createCardsFromTxt("BingoCards.txt");
+        bingoHandler.addPattern("Row Pattern");
+        bingoHandler.addPattern("Column Pattern");
+
+
+
+        assertEquals(3, bingoHandler.countBingos(bingoHandler.allCards[2]));
+    }
 }
