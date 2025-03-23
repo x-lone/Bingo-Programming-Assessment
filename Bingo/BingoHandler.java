@@ -265,9 +265,14 @@ public class BingoHandler {
     }
 
     public void addPattern(String patternType) {
+        Pattern newPattern = null;
         switch (patternType) {
             case "Row Pattern":
-                Pattern newPattern = new Pattern("Row Pattern");
+                newPattern = new Pattern("Row Pattern");
+                validPatterns.add(newPattern);
+                break;
+            case "Column Pattern":
+                newPattern = new Pattern("Column Pattern");
                 validPatterns.add(newPattern);
                 break;
             default:
