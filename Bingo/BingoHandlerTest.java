@@ -4,6 +4,7 @@ import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 
+// Unit tests to ensure the methods of BingoHandler works as expected. 
 public class BingoHandlerTest {
     @Test
     public void BM1() {

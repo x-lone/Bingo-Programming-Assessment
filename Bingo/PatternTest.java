@@ -4,6 +4,7 @@ import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 
+// Unit tests to ensure the methods of Pattern works as expected. 
 public class PatternTest {
     @Test
     public void P1() {
