@@ -6,7 +6,7 @@ import org.junit.Test;
 
 // Unit tests to ensure the methods of BingoHandler works as expected. 
 public class BingoHandlerTest {
-    // Tests Rows > Expected Output: true
+    // Tests Row Pattern > Expected Output: true
     // X X X X X
     // O O O O O
     // O O O O O
@@ -27,7 +27,7 @@ public class BingoHandlerTest {
         assertEquals(1, bingoHandler.countBingos(bingoHandler.allCards[0]));
     }
 
-    // Tests Rows > Expected Output: true
+    // Tests Row Pattern > Expected Output: true
     // O O O O O
     // O O O O O
     // X X X X X
@@ -48,7 +48,7 @@ public class BingoHandlerTest {
         assertEquals(3, bingoHandler.countBingos(bingoHandler.allCards[1]));
     }
 
-    // Tests Rows > Expected Output: true
+    // Tests Row Pattern > Expected Output: true
     // O O O O O
     // O O O O O
     // O O O O O
@@ -72,7 +72,7 @@ public class BingoHandlerTest {
         assertEquals(3, bingoHandler.countBingos(bingoHandler.allCards[2]));
     }
 
-    // Tests Rows > Expected Output: false
+    // Tests Row Pattern > Expected Output: false
     // X X X X O
     // O O O O O
     // O O O O O
