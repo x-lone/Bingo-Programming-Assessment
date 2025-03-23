@@ -19,6 +19,7 @@ public class Pattern {
                 if (card.cardSpaces[y*5+x] != "XX") {
                     break;
                 }
+                card.cardSpaces[y*5+x] = "--";
                 if (x == 4) {
                     return true;
                 }
@@ -76,6 +77,16 @@ public class Pattern {
         }
 
         return false;
+    }
+
+    public void resetCheckedSpaces(CardHandler card) {
+        for (int x = 0; x < 5; x++) {
+            for (int y = 0; y < 5; y++) {
+                if (card.cardSpaces[y*5+x] == "--") {
+                    card.cardSpaces[y*5+x] = "XX";
+                }
+            }
+        }
     }
 
     public boolean checkCard(CardHandler card) {
