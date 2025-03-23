@@ -263,7 +263,7 @@ public class BingoHandler {
         return returnCards;
     }
 
-    private void addPattern(String patternType) {
+    public void addPattern(String patternType) {
         switch (patternType) {
             case "Row Pattern":
                 Pattern newPattern = new Pattern("Row Pattern");
@@ -274,7 +274,7 @@ public class BingoHandler {
         }
     }
 
-    private int countBingos(CardHandler card) {
+    public int countBingos(CardHandler card) {
         int bingos = 0;
 
         for (Pattern pattern : validPatterns) {
