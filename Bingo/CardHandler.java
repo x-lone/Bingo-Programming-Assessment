@@ -59,6 +59,7 @@ public class CardHandler {
         return false;
     }
 
+    // undos the actions of validateCard by changing all || spaces to XX.
     public void undoValidateCard() {
         for (int i = 0; i < 25; i++) {
             if (cardSpaces[i] == "||") {
@@ -67,6 +68,8 @@ public class CardHandler {
         }   
     }
 
+    // Checks every space of the card to first confirm that it has been stamped then if that stamp has been previously called thus inside of [calledSpaces]
+    // if it isn't inside the space is replaced with || so that the space isnt recognised by countBingos.
     public void validateCard(String[] calledSpaces) {
         for (int y = 0; y < 5; y++) {
             for (int x = 0; x < 5; x++) {
