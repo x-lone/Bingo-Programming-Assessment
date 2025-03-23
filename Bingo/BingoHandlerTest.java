@@ -27,11 +27,11 @@ public class BingoHandlerTest {
 
         for (int y = 0; y < 5; y+=2) {
             for (int x = 0; x < 5; x++) {
-                bingoHandler.allCards[0].stampLocation(""+"BINGO".charAt(x)+"BINGO".charAt(y));
+                bingoHandler.allCards[1].stampLocation(""+"BINGO".charAt(x)+"BINGO".charAt(y));
             }
         }
 
-        assertEquals(3, bingoHandler.countBingos(bingoHandler.allCards[0]));
+        assertEquals(3, bingoHandler.countBingos(bingoHandler.allCards[1]));
     }
     @Test
     public void BM3() {
@@ -41,13 +41,13 @@ public class BingoHandlerTest {
 
         for (int y = 0; y < 5; y+=2) {
             for (int x = 0; x < 5; x++) {
-                bingoHandler.allCards[0].stampLocation(""+"BINGO".charAt(x)+"BINGO".charAt(y));
+                bingoHandler.allCards[2].stampLocation(""+"BINGO".charAt(x)+"BINGO".charAt(y));
             }
         }
         for (int y = 0; y < 5; y++) {
-            bingoHandler.allCards[0].stampLocation("O"+"BINGO".charAt(y));
+            bingoHandler.allCards[2].stampLocation("O"+"BINGO".charAt(y));
         }
 
-        assertEquals(3, bingoHandler.countBingos(bingoHandler.allCards[0]));
+        assertEquals(3, bingoHandler.countBingos(bingoHandler.allCards[2]));
     }
 }
