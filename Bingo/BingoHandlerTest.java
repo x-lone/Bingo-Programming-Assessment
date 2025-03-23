@@ -146,6 +146,13 @@ public class BingoHandlerTest {
 
         assertEquals(14, bingoHandler.countBingos(bingoHandler.allCards[5]));
     }
+
+    // Tests Column Pattern > Expected Output: true
+    // O O O O X
+    // O O O O X
+    // O O O O X
+    // O O O O X
+    // O O O O X
     @Test
     public void BM7() {
         BingoHandler bingoHandler = new BingoHandler();
@@ -169,6 +176,13 @@ public class BingoHandlerTest {
 
         assertEquals(9, bingoHandler.countBingos(bingoHandler.allCards[6]));
     }
+
+    // Tests Column Pattern > Expected Output: false
+    // X X X X X
+    // O O O O O
+    // O O O O O
+    // O O O O O
+    // O O O O O
     @Test
     public void BM8() {
         BingoHandler bingoHandler = new BingoHandler();
