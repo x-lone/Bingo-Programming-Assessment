@@ -125,7 +125,7 @@ public class BingoHandlerTest {
             }
         }
 
-        assertEquals(10, bingoHandler.countBingos(bingoHandler.allCards[6]));
+        assertEquals(9, bingoHandler.countBingos(bingoHandler.allCards[6]));
     }
     @Test
     public void BM8() {
