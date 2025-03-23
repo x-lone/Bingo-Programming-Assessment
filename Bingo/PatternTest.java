@@ -225,7 +225,7 @@ public class PatternTest {
     public void P17() {
         int[][] customPattern = {{0,0},{1,0},{2,0},{3,0},{4,0},{0,4},{1,4},{2,4},{3,4},{4,4},{0,1},{0,2},{0,3},{4,1},{4,2},{4,3}};
         Pattern pattern = new Pattern(customPattern);
-        CardHandler card = new CardHandler("card9", "5,22,37,47,65,7,21,33,59,71,4,26,45,58,66,10,27,41,60,68,11,25,35,57,64");
+        CardHandler card = new CardHandler("card1", "3,22,32,51,66,6,19,44,60,61,7,27,45,58,72,15,16,48,46,75,1,30,31,52,63");
 
         for (int x = 0; x < 5; x++) {
             card.stampLocation(""+"BINGO".charAt(x)+"B");
@@ -236,6 +236,16 @@ public class PatternTest {
         for (int x = 0; x < 4; x++) {
             card.stampLocation(""+"BINGO".charAt(x)+"O");
         }
+        
+        assertEquals(true, pattern.checkCard(card));
+    }
+    @Test
+    public void P18() {
+        int[][] customPattern = {{0,0},{1,0},{2,0},{3,0},{4,0},{0,4},{1,4},{2,4},{3,4},{4,4},{0,1},{0,2},{0,3},{4,1},{4,2},{4,3}};
+        Pattern pattern = new Pattern(customPattern);
+        CardHandler card = new CardHandler("Card2", "9,17,33,56,68,6,30,34,46,70,7,26,37,58,66,5,25,39,47,62,13,22,44,57,72");
+
+
         
         assertEquals(true, pattern.checkCard(card));
     }
