@@ -183,6 +183,13 @@ public class PatternTest {
         
         assertEquals(false, pattern.checkCard(card));
     }
+
+    // Tests Diagonal Pattern > Expected Output: true
+    // O O O O X
+    // O O O X O
+    // O O X O O
+    // O X O O O
+    // X O O O O
     @Test
     public void P10() {
         Pattern pattern = new Pattern("Diagonal Pattern");
@@ -196,6 +203,13 @@ public class PatternTest {
         
         assertEquals(true, pattern.checkCard(card));
     }
+
+    // Tests Diagonal Pattern > Expected Output: true
+    // X O O O O
+    // O X O O O
+    // O O X O O
+    // O O O X O
+    // O O O O X
     @Test
     public void P11() {
         Pattern pattern = new Pattern("Diagonal Pattern");
