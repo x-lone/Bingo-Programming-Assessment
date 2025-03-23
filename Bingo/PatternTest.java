@@ -204,4 +204,14 @@ public class PatternTest {
         
         assertEquals(true, pattern.checkCard(card));
     }
+    @Test
+    public void P16() {
+        int[][] customPattern = {{0,0},{1,0},{2,0},{3,0},{4,0},{0,4},{1,4},{2,4},{3,4},{4,4},{0,1},{0,2},{0,3},{4,1},{4,2},{4,3}};
+        Pattern pattern = new Pattern(customPattern);
+        CardHandler card = new CardHandler("card8", "13,20,35,58,69,3,22,39,54,74,1,17,34,55,75,2,25,45,57,73,11,21,31,52,70");
+
+
+        
+        assertEquals(true, pattern.checkCard(card));
+    }
 }
