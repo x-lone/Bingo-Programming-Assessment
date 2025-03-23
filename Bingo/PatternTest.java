@@ -290,7 +290,7 @@ public class PatternTest {
         assertEquals(true, pattern.checkCard(card));
     }
     
-    // Tests Custom Pattern Toprow & Middle Column (the "T") > Expected Output: true
+    // Tests Custom Pattern Toprow & Middle Column (the "T") > Expected Output: false
     // X X X X X
     // X X X X X
     // X X O X X
