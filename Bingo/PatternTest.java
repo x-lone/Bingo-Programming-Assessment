@@ -191,4 +191,17 @@ public class PatternTest {
         
         assertEquals(true, pattern.checkCard(card));
     }
+    @Test
+    public void P15() {
+        int[][] customPattern = {{0,0},{1,0},{2,0},{3,0},{4,0},{2,1},{2,2},{2,3},{2,4}};
+        Pattern pattern = new Pattern(customPattern);
+        CardHandler card = new CardHandler("card8", "13,20,35,58,69,3,22,39,54,74,1,17,34,55,75,2,25,45,57,73,11,21,31,52,70");
+
+        for (int y = 0; y < 5; y++) {
+            card.stampLocation(""+"BINGO".charAt(y)+"B");
+        }
+        card.stampLocation("NO");
+        
+        assertEquals(true, pattern.checkCard(card));
+    }
 }
